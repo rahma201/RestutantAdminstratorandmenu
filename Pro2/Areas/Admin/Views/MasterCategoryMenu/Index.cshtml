@@ -1,0 +1,117 @@
+﻿@model Pro2.View_Models.MasterCategoryMenuFullViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Index" enctype="multipart/form-data" method="post" id="pristine-valid-example" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="  Id" />
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="  MasterCategoryMenuName" class="control-label"></label>
+                                <input asp-for=" MasterCategoryMenuName" class="form-control" />
+                                <span asp-validation-for=" MasterCategoryMenuName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                     
+
+
+                        <div class="form-group mb-3 form-check">
+                            <input asp-for="IsActive" class="form-check-input" />
+                            <label asp-for="IsActive" class="form-check-label"></label>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <a asp-action="index" asp-route-id="" class="btn btn-info">Clear</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">About</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                        <table id="tech-companies-1" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.MasterCategoryMenuName)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IsActive)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.MasterCategoryMenulist)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MasterCategoryMenuName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsActive)
+                                        </td>
+                                        <td>
+                                            <a asp-action="index" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                            <form asp-action="DeleteFullAction" id="deleteForm_@item.Id">
+                                                <input type="hidden" name="Id" class="id_@item.Id" value="@item.Id" />
+                                                <button type="button" onclick="DeleteConfirmation(@item.Id)" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function DeleteConfirmation(id) {
+        $('.id_' + id).val(id);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`#deleteForm_${id}`).submit();
+                }
+            });
+        }
+
+    </script>
+}

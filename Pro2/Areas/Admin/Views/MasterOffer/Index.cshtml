@@ -1,0 +1,161 @@
+﻿@model Pro2.View_Models.MasterOfferFullViewMdel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Index" enctype="multipart/form-data" method="post" novalidate id="pristine-valid-example">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="MasterOfferImageUrl" />
+
+
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="MasterOfferImageFile" class="control-label"></label>
+                                <input asp-for="MasterOfferImageFile" class="form-control" type="file" />
+                                <span asp-validation-for="MasterOfferImageFile" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="MasterOfferDesc" class="control-label"></label>
+                                <input asp-for="MasterOfferDesc" class="form-control" />
+                                <span asp-validation-for="MasterOfferDesc" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="MasterOfferBreef" class="control-label"></label>
+                                <input asp-for="MasterOfferBreef" class="form-control" />
+                                <span asp-validation-for="MasterOfferBreef" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="MasterOfferTitle" class="control-label"></label>
+                                <textarea asp-for="MasterOfferTitle" class="form-control"></textarea>
+                                <span asp-validation-for="MasterOfferTitle" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                       
+                    </div>
+
+                    <div class="form-group mb-3 form-check">
+                        <input class="form-check-input" asp-for="IsActive" />
+                        <label class="form-check-label" asp-for="IsActive"></label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Index" asp-route-id="" class="btn btn-info">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MasterOfferTitle)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MasterOfferBreef)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MasterOfferDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MasterOfferImageUrl)
+                            </th>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.MasterOfferlist)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MasterOfferTitle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MasterOfferBreef)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MasterOfferDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MasterOfferImageUrl)
+                                </td>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                <td>
+                                    <a asp-action="index" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                    <form asp-action="DeleteFullAction" id="deleteForm_@item.Id" method="post" style="display:inline;">
+                                        <input type="hidden" name="Id" class="id_@item.Id" value="@item.Id" />
+                                        <button type="button" onclick="DeleteConfirmation(@item.Id)" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+                    function DeleteConfirmation(id) {
+        $('.id_' + id).val(id);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`#deleteForm_${id}`).submit();
+                }
+            });
+        }
+
+    </script>
+
+}

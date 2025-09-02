@@ -1,0 +1,229 @@
+﻿@model Pro2.View_Models.SystemSettingFullViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Index" enctype="multipart/form-data" method="post" novalidate id="pristine-valid-example">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="SystemSettingLogoImageUrl" />
+                    <input type="hidden" asp-for="SystemSettingLogoImageUrl2" />
+                    <input type="hidden" asp-for="SystemSettingWelcomeNoteImageUrl" />
+
+                    <div class="row">
+                        <!-- شعار الموقع -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingLogoImageFile" class="control-label"></label>
+                                <input asp-for="SystemSettingLogoImageFile" class="form-control" type="file" />
+                                <span asp-validation-for="SystemSettingLogoImageFile" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- الشعار الثاني -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingLogoImageFile2" class="control-label"></label>
+                                <input asp-for="SystemSettingLogoImageFile2" class="form-control" type="file" />
+                                <span asp-validation-for="SystemSettingLogoImageFile2" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- صورة الترحيب -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingWelcomeNoteImageFile" class="control-label"></label>
+                                <input asp-for="SystemSettingWelcomeNoteImageFile" class="form-control" type="file" />
+                                <span asp-validation-for="SystemSettingWelcomeNoteImageFile" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- حقوق النشر -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingCopyright" class="control-label"></label>
+                                <input asp-for="SystemSettingCopyright" class="form-control" />
+                                <span asp-validation-for="SystemSettingCopyright" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- عنوان الترحيب -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingWelcomeNoteTitle" class="control-label"></label>
+                                <input asp-for="SystemSettingWelcomeNoteTitle" class="form-control" />
+                                <span asp-validation-for="SystemSettingWelcomeNoteTitle" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- ملخص الترحيب -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingWelcomeNoteBreef" class="control-label"></label>
+                                <input asp-for="SystemSettingWelcomeNoteBreef" class="form-control" />
+                                <span asp-validation-for="SystemSettingWelcomeNoteBreef" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- وصف الترحيب -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingWelcomeNoteDesc" class="control-label"></label>
+                                <textarea asp-for="SystemSettingWelcomeNoteDesc" class="form-control"></textarea>
+                                <span asp-validation-for="SystemSettingWelcomeNoteDesc" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- رابط الترحيب -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SystemSettingWelcomeNoteUrl" class="control-label"></label>
+                                <input asp-for="SystemSettingWelcomeNoteUrl" class="form-control" />
+                                <span asp-validation-for="SystemSettingWelcomeNoteUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الحالة -->
+                    <div class="form-group mb-3 form-check">
+                        <input class="form-check-input" asp-for="IsActive" />
+                        <label class="form-check-label" asp-for="IsActive"></label>
+                    </div>
+
+                    <!-- الأزرار -->
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Index" asp-route-id="" class="btn btn-info">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+           
+            <div class="card-body">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingLogoImageUrl)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingCopyright)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingWelcomeNoteTitle)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingWelcomeNoteBreef)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingWelcomeNoteDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingWelcomeNoteUrl)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingLogoImageUrl2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SystemSettingWelcomeNoteImageUrl)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SystemSettinglist)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingLogoImageUrl)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingCopyright)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteTitle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteBreef)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteUrl)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingLogoImageUrl2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteImageUrl)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                        <td>
+                                            <a asp-action="index" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                            <form asp-action="DeleteFullAction" id="deleteForm_@item.Id" method="post" style="display:inline;">
+                                                <input type="hidden" name="Id" class="id_@item.Id" value="@item.Id" />
+                                                <button type="button" onclick="DeleteConfirmation(@item.Id)" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+                    function DeleteConfirmation(id) {
+        $('.id_' + id).val(id);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`#deleteForm_${id}`).submit();
+                }
+            });
+        }
+
+    </script>
+
+}
